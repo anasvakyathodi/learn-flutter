@@ -1,5 +1,11 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import './Button.dart';
+import './NavBar.dart';
+import './FloatButton.dart';
+import './Drawer.dart';
+import './HeroSection.dart';
+import './About.dart';
+import './Services.dart';
 
 void main() => runApp(
       MaterialApp(
@@ -13,20 +19,21 @@ void main() => runApp(
     );
 
 class HomePage extends StatelessWidget {
+  final GlobalKey<ScaffoldState> _scaffoldKey = new GlobalKey<ScaffoldState>();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: AppBar(
-          title: Image.asset(
-            'assets/logo.png',
-            fit: BoxFit.cover,
-            height: 32,
-          ),
-        ),
-        body: Column(
-          children: <Widget>[
-            Button(),
-          ],
-        ));
+      key: _scaffoldKey,
+      appBar: NavBar(),
+      drawer: MyDrawer(),
+      body: ListView(
+        children: <Widget>[
+          HeroSection(),
+          Services(),
+          About(),
+        ],
+      ),
+      floatingActionButton: FloatButton(),
+    );
   }
 }
